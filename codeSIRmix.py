@@ -76,6 +76,7 @@ for i in range(11):
     R = N-S-I
 
 #plt.plot(t, S, 'k', label = 'susceptible')
+    hfont = {'fontname':'DejaVu Sans'}
     mpl.rcParams["font.size"] = 12
     
     plt.plot(t, I, label = 'infected')
@@ -85,22 +86,21 @@ for i in range(11):
     plt.title(r'SIR mix ode model with $\beta$  = 0.25, $\gamma$ = 0.05')
     plt.xlabel('days elapsed since 1 percent of the population became infected')
     plt.ylabel('population')
-    plt.annotate('q = 0.0', ha = 'center', va = 'bottom', xytext = 
-                 (1.3E2, 1.1E5),xy = (60, 0.8E5),arrowprops = {'facecolor' : 'black'})
-    plt.annotate('q = 1.0', ha = 'center', va = 'bottom', xytext = 
-                 (1.2E2, 4.0E5),xy = (40, 4.6E5),arrowprops = {'facecolor' : 'black'})
-    plt.annotate('50% PD population', xy=(0.6, 0.8), xycoords='axes fraction')
-    plt.annotate('q = 0.0 -> full PD', xy=(0.6, 0.74), xycoords='axes fraction')
-    plt.annotate('q = 1.0 -> no PD', xy=(0.6, 0.68), xycoords='axes fraction')
-    plt.annotate(r'$\frac{\partial S_1}{\partial t} = - \frac{q \beta}{N} S_1 I$'
-                 , xy=(0.6, 0.58), xycoords='axes fraction')
-    plt.annotate(r'$\frac{\partial S_2}{\partial t} = -\frac{\beta}{N} S_2 I$'
-                 , xy=(0.6, 0.48), xycoords='axes fraction')
-    plt.annotate(r'$S = S_1 + S_2$'
-                 , xy=(0.6, 0.38), xycoords='axes fraction')
+
 #    plt.annotate('hello')
 #    plt.annotate('q = 1.0', ha = 'center', va = 'bottom', xytext = 
 #                 (10, 3.5),xy = (0.69, 0),arrowprops = {'facecolor' : 'black'})
-
+plt.annotate('q = 0.0', ha = 'center', va = 'bottom', xytext = (1.3E2, 1.1E5), 
+             xy = (60, 0.8E5),arrowprops = {'facecolor' : 'black'})
+plt.annotate('q = 1.0', ha = 'center', va = 'bottom', xytext = (1.2E2, 4.0E5), 
+             xy = (40, 4.6E5),arrowprops = {'facecolor' : 'black'})
+plt.annotate('50% PD population', xy=(0.6, 0.8), xycoords='axes fraction', **hfont)
+plt.annotate('q = 0.0 -> full PD', xy=(0.6, 0.74), xycoords='axes fraction')
+plt.annotate('q = 1.0 -> no PD', xy=(0.6, 0.68), xycoords='axes fraction')
+plt.annotate(r'$\frac{\partial S_1}{\partial t} = - \frac{q \beta}{N} S_1 I$', 
+             xy=(0.6, 0.58), xycoords='axes fraction')
+plt.annotate(r'$\frac{\partial S_2}{\partial t} = -\frac{\beta}{N} S_2 I$', 
+             xy=(0.6, 0.48), xycoords='axes fraction')
+plt.annotate(r'$S = S_1 + S_2$', xy=(0.6, 0.38), xycoords='axes fraction')
 plt.show()
 
