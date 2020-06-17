@@ -16,6 +16,7 @@ Created on Tue Feb 18 14:48:58 2020
 
 # importing packages
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import scipy as sp
 import math
@@ -34,7 +35,7 @@ gamma = 0.05
 # total population
 N = 1E6
 # total time (days)
-tottime = 1000
+tottime = 365
 # initial percent removed (immune)
 pr = 0.0
 # initial percent infected
@@ -45,9 +46,9 @@ ps = 1-pr-pi
 psd = 0.5
 # plotting
 fig = plt.figure()
-for i in range(5):
+for i in range(11):
 # social distance factor (0 = total isolation, 1 = no isolation)
-    q = 0.1*i
+    q = 0.1*(i-1)
     
     niter = int(math.ceil(tottime/dt))
     t = np.arange(0, tottime, dt)   
@@ -75,13 +76,31 @@ for i in range(5):
     R = N-S-I
 
 #plt.plot(t, S, 'k', label = 'susceptible')
-    plt.plot(t, I, 'm', label = 'infected')
+    mpl.rcParams["font.size"] = 12
+    
+    plt.plot(t, I, label = 'infected')
 #plt.plot(t, R, 'b', label = 'recovered')
 #plt.plot(t, R+S+I, 'y', label = 'total')
-#plt.gca().legend(('susceptible','infected','recovered','total'))
-    plt.title('SIR mix ode model with beta = 0.25, gamma = 0.05')
+#    plt.gca().legend(('susceptible','infected','recovered','total'))
+    plt.title(r'SIR mix ode model with $\beta$  = 0.25, $\gamma$ = 0.05')
     plt.xlabel('days elapsed since 1 percent of the population became infected')
     plt.ylabel('population')
+    plt.annotate('q = 0.0', ha = 'center', va = 'bottom', xytext = 
+                 (1.3E2, 1.1E5),xy = (60, 0.8E5),arrowprops = {'facecolor' : 'black'})
+    plt.annotate('q = 1.0', ha = 'center', va = 'bottom', xytext = 
+                 (1.2E2, 4.0E5),xy = (40, 4.6E5),arrowprops = {'facecolor' : 'black'})
+    plt.annotate('50% PD population', xy=(0.6, 0.8), xycoords='axes fraction')
+    plt.annotate('q = 0.0 -> full PD', xy=(0.6, 0.74), xycoords='axes fraction')
+    plt.annotate('q = 1.0 -> no PD', xy=(0.6, 0.68), xycoords='axes fraction')
+    plt.annotate(r'$\frac{\partial S_1}{\partial t} = - \frac{q \beta}{N} S_1 I$'
+                 , xy=(0.6, 0.58), xycoords='axes fraction')
+    plt.annotate(r'$\frac{\partial S_2}{\partial t} = -\frac{\beta}{N} S_2 I$'
+                 , xy=(0.6, 0.48), xycoords='axes fraction')
+    plt.annotate(r'$S = S_1 + S_2$'
+                 , xy=(0.6, 0.38), xycoords='axes fraction')
+#    plt.annotate('hello')
+#    plt.annotate('q = 1.0', ha = 'center', va = 'bottom', xytext = 
+#                 (10, 3.5),xy = (0.69, 0),arrowprops = {'facecolor' : 'black'})
 
 plt.show()
 
